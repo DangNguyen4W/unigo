@@ -1,0 +1,14 @@
+$bytes = New-Object byte[] 32
+[System.Security.Cryptography.RandomNumberGenerator]::Fill($bytes)
+$env:JWT_SECRET_BASE64 = [Convert]::ToBase64String($bytes)
+$env:JWT_ACCESS_TOKEN_EXPIRATION_MS = "900000"
+
+
+$env:BOOTSTRAP_ADMIN_USERNAME = "superadmin"
+$env:BOOTSTRAP_ADMIN_EMAIL = "admin@example.com"
+$env:BOOTSTRAP_ADMIN_PASSWORD = Read-Host "Admin password"
+$env:BOOTSTRAP_ADMIN_ENABLED = "true"
+
+
+muvkvCtmrGb7wBxT4XjxF9CcQAgtFqcnzhjT4SkxDxA=
+12345678
