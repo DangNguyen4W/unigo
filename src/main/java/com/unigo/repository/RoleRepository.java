@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.unigo.entity.Role;
 
-public interface RoleRepository extends JpaRepository<Role, Short> {
+public interface RoleRepository extends JpaRepository<Role, Integer> {
 
-    Optional<Role> findByName(String name);
+  Optional<Role> findByName(String name);
 }

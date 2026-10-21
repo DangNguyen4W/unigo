@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.unigo.dto.request.LoginRequest;
 import com.unigo.dto.request.RegisterRequest;
 import com.unigo.dto.response.AuthResponse;
 import com.unigo.service.AuthService;
@@ -31,9 +32,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public void login(@Valid @RequestBody String body) {
-        // TODO: process POST request
-
+    public AuthResponse login(@Valid @RequestBody LoginRequest body) {
+        return authService.login(body);
     }
 
 }

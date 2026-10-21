@@ -3,9 +3,11 @@ package com.unigo.service;
 import java.security.SecureRandom;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.unigo.dto.request.LoginRequest;
 import com.unigo.dto.request.RegisterRequest;
 import com.unigo.dto.response.AuthResponse;
 import com.unigo.entity.Role;
@@ -49,7 +51,7 @@ public class AuthService {
     if (userRepository.existsByPhoneNumber(user.phoneNumber())) {
       throw new RuntimeException("This phone number already exist");
     }
-    if (userRepository.existsByEmail(user.email())) {
+    if (user.email() != null && userRepository.existsByEmail(user.email())) {
       throw new RuntimeException("This email already exist");
     }
     String username = user.username();
@@ -82,12 +84,26 @@ public class AuthService {
 
     User savedUser = userRepository.save(newUser);
 
+    System.out.println("savedUser");
+    System.out.println(savedUser.getCreatedAt());
+
     return new AuthResponse(
         userMapper.toResponse(savedUser),
         jwtService.generateAccessToken(savedUser));
   }
 
-  @Transactional
-  public void login() {
+  @Transactional(readOnly = true)
+  public AuthResponse login(LoginRequest body) {
+    User user = userRepository.findByPhoneNumber(body.phoneNumber())
+        .orElseThrow(() -> new BadCredentialsException("Invalid phone number or password"));
+
+    if (!user.getIsActive()
+        || !passwordEncoder.matches(body.password(), user.getPassword())) {
+      throw new BadCredentialsException("Invalid phone number or password");
+    }
+
+    return new AuthResponse(
+        userMapper.toResponse(user),
+        jwtService.generateAccessToken(user));
   }
 }

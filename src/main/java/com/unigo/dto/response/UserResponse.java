@@ -1,6 +1,6 @@
 package com.unigo.dto.response;
 
-import com.unigo.entity.Role;
+import java.time.Instant;
 
 public record UserResponse(
     String id,
@@ -9,8 +9,8 @@ public record UserResponse(
     String firstName,
     String lastName,
     String phoneNumber,
-    Role role,
-    Boolean isActive,
-    String createdAt,
-    String updatedAt) {
+    RoleResponse role,
+    boolean isActive,
+    Instant createdAt,
+    Instant updatedAt) {
 }

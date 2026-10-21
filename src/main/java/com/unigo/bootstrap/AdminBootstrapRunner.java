@@ -32,7 +32,7 @@ public class AdminBootstrapRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments arg) {
-        Boolean isAdminExist = userRepository.existsByRole_Name("SUPER_ADMIN");
+        boolean isAdminExist = userRepository.existsByRole_Name("SUPER_ADMIN");
         if (isAdminExist) {
             System.out.println("SUPER_ADMIN already exists. Bootstrap skipped.");
             return;
