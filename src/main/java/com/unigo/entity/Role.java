@@ -18,6 +18,9 @@ public class Role extends BaseEntity {
   @Column(name = "name", nullable = false, unique = true, length = 50)
   private String name;
 
+  @Column(name = "is_active", nullable = false)
+  private boolean isActive = true;
+
   public Role() {
   }
 
@@ -39,6 +42,14 @@ public class Role extends BaseEntity {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public boolean getIsActive() {
+    return isActive;
+  }
+
+  public void setIsActive(boolean isActive) {
+    this.isActive = isActive;
   }
 
 }

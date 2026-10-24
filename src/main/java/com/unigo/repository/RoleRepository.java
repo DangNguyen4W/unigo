@@ -9,4 +9,6 @@ import com.unigo.entity.Role;
 public interface RoleRepository extends JpaRepository<Role, Integer> {
 
   Optional<Role> findByName(String name);
+
+  boolean existsByName(String name);
 }
