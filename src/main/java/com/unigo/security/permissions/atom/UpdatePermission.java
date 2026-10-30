@@ -1,4 +1,4 @@
-package com.unigo.security.permission.atom;
+package com.unigo.security.permissions.atom;
 
 public interface UpdatePermission {
   public String update();

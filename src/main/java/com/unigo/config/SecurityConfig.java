@@ -30,6 +30,9 @@ public class SecurityConfig {
                 "/auth/register",
                 "/auth/login")
             .permitAll()
+            .requestMatchers(HttpMethod.GET,
+                "/permissions")
+            .permitAll()
             .requestMatchers("/error").permitAll()
             .requestMatchers("/admin/**").hasRole("SUPER_ADMIN")
             .requestMatchers("/roles/**").hasRole("SUPER_ADMIN")

@@ -37,4 +37,4 @@ CREATE TABLE permissions(
 CREATE TABLE role_permissions(
   role_id integer NOT NULL REFERENCES roles(id),
   permission_id bigint NOT NULL REFERENCES permissions(id),
-  PRIMARY KEY (role_id, permission_id)) { }
+  PRIMARY KEY (role_id, permission_id))
