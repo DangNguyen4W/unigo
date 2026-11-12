@@ -1,10 +1,16 @@
 package com.unigo.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +26,10 @@ public class Role extends BaseEntity {
 
   @Column(name = "is_active", nullable = false)
   private boolean isActive = true;
+
+  @ManyToMany
+  @JoinTable(name = "role_permissions", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
+  private final Set<Permission> permissions = new HashSet<>();
 
   public Role() {
   }
@@ -46,6 +56,10 @@ public class Role extends BaseEntity {
 
   public void setIsActive(boolean isActive) {
     this.isActive = isActive;
+  }
+
+  public Set<Permission> getPermissions() {
+    return permissions;
   }
 
 }

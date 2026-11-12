@@ -17,4 +17,5 @@ public final class Permissions {
   public List<String> all() {
     return permissionSets.stream().flatMap(permissionSet -> permissionSet.all().stream()).distinct().toList();
   }
+
 }

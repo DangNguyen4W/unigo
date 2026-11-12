@@ -1,4 +1,4 @@
-package com.unigo.dto.request.role;
+package com.unigo.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

@@ -9,7 +9,7 @@ public record UserResponse(
     String firstName,
     String lastName,
     String phoneNumber,
-    RoleResponse role,
+    RoleResponseDetail role,
     boolean isActive,
     Instant createdAt,
     Instant updatedAt) {

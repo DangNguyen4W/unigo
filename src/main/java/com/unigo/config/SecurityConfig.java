@@ -1,5 +1,7 @@
 package com.unigo.config;
 
+import com.unigo.security.permissions.organism.RolesPermission;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,6 +14,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 public class SecurityConfig {
+
+  private final RolesPermission rolesPermission;
+
+  SecurityConfig(RolesPermission rolesPermission) {
+    this.rolesPermission = rolesPermission;
+  }
 
   @Bean
   SecurityFilterChain securityFilterChain(
@@ -30,12 +38,8 @@ public class SecurityConfig {
                 "/auth/register",
                 "/auth/login")
             .permitAll()
-            .requestMatchers(HttpMethod.GET,
-                "/permissions")
-            .permitAll()
             .requestMatchers("/error").permitAll()
-            .requestMatchers("/admin/**").hasRole("SUPER_ADMIN")
-            .requestMatchers("/roles/**").hasRole("SUPER_ADMIN")
+            .requestMatchers("/roles/assign-permissions").hasRole(rolesPermission.assignPermissions())
             .anyRequest().authenticated())
         .addFilterBefore(
             jwtAuthenticationFilter,
